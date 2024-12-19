@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Valor</title>
+</head>
+<body>
+    <h1>Editar Valor</h1>
+    <form method="POST">
+        <label for="valor">Novo Valor:</label>
+        <input type="text" id="valor" name="valor" value="{{ valor[1] }}" required>
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="{{ url_for('custom_fields') }}">Voltar</a>
+</body>
+</html>

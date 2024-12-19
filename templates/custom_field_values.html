@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciar Valores do Campo</title>
+</head>
+<body>
+    <h1>Gerenciar Valores: {{ campo[1] }}</h1>
+    <<form method="POST" action="{{ url_for('custom_field_values', campo_id=campo[0]) }}">
+        <input type="text" name="valor" placeholder="Novo Valor" required>
+        <button type="submit">Adicionar Valor</button>
+    </form>
+    <h2>Valores Existentes</h2>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for valor in valores %}
+            <tr>
+                <td>{{ valor[0] }}</td>
+                <td>{{ valor[1] }}</td>
+                <td>
+                    <a href="{{ url_for('editar_valor', valor_id=valor[0]) }}">Editar</a>
+                    <form method="POST" action="{{ url_for('excluir_valor', valor_id=valor[0]) }}" style="display: inline;">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este valor?');">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('custom_fields') }}">Voltar</a>
+</body>
+</html>

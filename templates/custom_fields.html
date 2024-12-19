@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Campos Personalizados</title>
+</head>
+<body>
+    <h1>Gerenciar Campos Personalizados</h1>
+
+    <form method="POST">
+        <label for="nome">Nome do Campo:</label>
+        <input type="text" name="nome" required>
+        <label for="tipo">Tipo:</label>
+        <select name="tipo">
+            <option value="manual">Manual</option>
+            <option value="ia">IA</option>
+        </select>
+        <button type="submit">Criar Campo</button>
+    </form>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for campo in campos %}
+            <tr>
+                <td>{{ campo[0] }}</td>
+                <td>{{ campo[1] }}</td>
+                <td>{{ campo[2] }}</td>
+                <td>
+                    <a href="{{ url_for('editar_campo', campo_id=campo[0]) }}">Editar</a>
+                    <a href="{{ url_for('custom_field_values', campo_id=campo[0]) }}">Gerenciar Valores</a>
+                    <form method="POST" action="{{ url_for('excluir_campo', campo_id=campo[0]) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Deseja excluir este campo?');">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>

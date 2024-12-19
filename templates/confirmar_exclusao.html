@@ -1,0 +1,7 @@
+<h1>Excluir Campo</h1>
+<p>Você tem certeza que deseja excluir o campo "{{ campo[1] }}"?</p>
+
+<form method="POST" action="{{ url_for('excluir_campo', campo_id=campo[0]) }}">
+    <button type="submit">Sim, Excluir</button>
+    <a href="{{ url_for('custom_fields') }}">Cancelar</a>
+</form>

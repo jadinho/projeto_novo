@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+            text-align: left;
+        }
+        .checkbox {
+            text-align: center;
+        }table
+
+    </style>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</head>
+<body>
+    <h1>Lista de Produtos</h1>
+
+    <!-- Botão para atualizar Nome Comercial -->
+    <form method="POST" action="/atualizar_nome_comercial" style="margin-bottom: 20px;">
+        <button onclick="atualizarNomeComercial()">Atualizar Nome Comercial</button>
+    </form>
+
+    <!-- Botão existente para salvar todos os dados -->
+    <button onclick="salvarDadosTabela()">Salvar Tudo</button>
+
+   
+    <!-- Tabela de produtos -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Código</th>
+                <th>EAN</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Cor</th>
+                <th>Faixa Etária</th>
+                <th>Gênero</th>
+                <th>Nome Comercial</th>
+                {% for campo in campos_personalizados %}
+                    <th>{{ campo[1] }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ produto[0] }}</td>
+                <td>{{ produto[1] }}</td>
+                <td>{{ produto[2] }}</td>
+                <td>{{ produto[3] }}</td>
+                <td>{{ produto[4] }}</td>
+                <td>{{ produto[5] }}</td>
+                <td>{{ produto[6] }}</td>
+                <td>{{ produto[7] }}</td>
+                <td>{{ produto[8] }}</td>
+                <td>{{ produto[9] }}</td>
+                <td>{{ produto[10] }}</td>
+                {% for campo in campos_personalizados %}
+                    <td>
+                        {% set valores = valores_personalizados.get(campo[0], []) %}
+                        {% if valores %}
+                            {{ ', '.join(valor['valor'] for valor in valores) }}
+                        {% else %}
+                            Sem valores
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>    
+    <script src="/static/js/scripts.js"></script>
+</body>
+
+</html>

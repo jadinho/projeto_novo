@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Campo</title>
+</head>
+<body>
+    <h1>Editar Campo</h1>
+    <form method="POST">
+        <label for="nome">Nome do Campo:</label>
+        <input type="text" id="nome" name="nome" value="{{ campo[1] }}" required>
+        <label for="tipo">Tipo do Campo:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="manual" {% if campo[2] == 'manual' %}selected{% endif %}>Manual</option>
+            <option value="ia" {% if campo[2] == 'ia' %}selected{% endif %}>IA</option>
+        </select>
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="{{ url_for('custom_fields') }}">Voltar</a>
+</body>
+</html>
